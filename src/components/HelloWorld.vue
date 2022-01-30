@@ -1,10 +1,10 @@
 /* 配置组件的结构 */
 <template>
   <div>
-    <h2>Hello Vue</h2>
-    <h2>Hello Vue</h2>
-    <h2>Hello Vue</h2>
-    <h2>Hello Vue</h2>
+    <h2>{{ Hello }}</h2>
+    <h2>{{ Hello }}</h2>
+    <h2>{{ Hello }}</h2>
+    <h2>{{ Hello }}</h2>
   </div>
 </template>
 
@@ -12,6 +12,11 @@
 <script>
 export default {
   name: "HelloWorld",
+  data() {
+    return {
+      Hello: "你好",
+    };
+  },
 };
 </script>
 
