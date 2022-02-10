@@ -1,25 +1,28 @@
 /* 配置组件的结构 */
 <template>
   <div class="row">
-    <!-- <h1 class="jz" v-show="listInfo.isFirst">欢迎使用</h1> -->
-    <!-- <h2 v-show="listInfo.isLoading">Loading....</h2> -->
-    <!-- <h2 class="jz" v-show="listInfo.errMsg">{{ listInfo.errMsg }}</h2> -->
-    <!-- <div
-      v-show="listInfo.users.length"
-      class="card"
-      v-for="userObj in listInfo.users"
-      :key="userObj.login"
-    > -->
+    <h1 class="text-center welcome" v-show="showModal.isFirst">欢迎使用</h1>
+    <h2 class="text-center" v-show="showModal.errMsg">
+      {{ showModal.errMsg }}
+    </h2>
+
     <div
-      class="card"
+      class="card container"
       v-for="(s, index) in itemInfo"
       :key="listInfo[index].id"
-      @click="ListenMusic(listInfo[index].id)"
+      @click="ListenMusic(listInfo[index].id, index)"
     >
-      <a href="#" target="_blank">
-        <img :src="s.picUrl" style="width: 100px" />
-      </a>
-      <p class="card-text">{{ listInfo[index].name }}</p>
+      <audio :src="playmusic" hidden loop autoplay controls></audio>
+      <img class="pic" :src="s.picUrl" />
+      <div class="card-name">
+        <p>{{ listInfo[index].name }}</p>
+        <p>{{ arInfo[index].name }}—{{ s.name }}</p>
+      </div>
+      <img :src="img[0].pic" ref="tu" class="isplay" />
+    </div>
+    <!-- 请稍后的遮罩层 -->
+    <div v-if="showModal.isLoading" class="mask">
+      <img class="loading-image" src="../assets/loading.gif" />
     </div>
   </div>
 </template>
@@ -30,58 +33,177 @@ export default {
   name: "Item",
   data() {
     return {
+      // 歌曲全部信息
       listInfo: {},
+      // 专辑的信息
       itemInfo: [],
+      // .ar的信息
+      arInfo: [],
+      // 接受一个dataObj数据 需要他的length
+      dataObj: "",
+      playId: "",
+      // 遮罩层的参数
+      showModal: {
+        isFirst: true,
+        isLoading: false,
+        errMsg: "",
+      },
+      img: [
+        {
+          // 播放的图片
+          pic: "https://s3.bmp.ovh/imgs/2022/02/2fb4821d4d99a89e.png",
+        },
+        {
+          // 暂停的图片
+          pic: "https://s3.bmp.ovh/imgs/2022/02/f689f81fd47d6cfb.png",
+        },
+      ],
     };
   },
   methods: {
+    // 筛选搜索结果
     ItemData(dataObj) {
+      // 备份一份
+      this.dataObj = dataObj;
       // 清除缓存
       this.listInfo = {};
       this.itemInfo = [];
+      this.arInfo = [];
       // 将数据展开并赋值 第一个参数没有参数则会将第二个参数赋去
       this.listInfo = { ...this.listInfo, ...dataObj };
       for (let i = 0; i < dataObj.length; i++) {
+        // 获取专辑数据
         this.itemInfo.push(dataObj[i].al);
+        // 获取ar数据
+        this.arInfo.push(dataObj[i].ar[0]);
       }
     },
-    ListenMusic(id) {
-      console.log(id);
+    // 更新一些数据
+    UpdatedData(updatedObj) {
+      this.showModal = { ...this.showModal, ...updatedObj };
+    },
+    // 操作audio音频
+    ListenMusic(id, index) {
+      // 获取被点击的音乐的id 传给playmusic
+      this.playId = id;
+
+      // ********************
+      // setTimeout是为了解决Uncaught (in promise) DOMException: The element has no supported sources.
+      // 原因应该是这个dom节点还没有加载起来 自然就会报错 然后执行音频播放的时候 settimeout 延迟50播放 即可
+      setTimeout(() => {
+        // 只允许同时播放一个音频
+        // 遍历所有的audio标签 判断哪一个是被我们所点击
+        // 如果不是则会通过pause()暂停
+        const audios = document.getElementsByTagName("audio");
+        function pauseAll() {
+          var self = this;
+          [].forEach.call(audios, function (i) {
+            // 将audios中其他的audio全部暂停
+            i !== self && i.pause();
+          });
+        }
+        // 给所有的audio标签绑定上暂停函数
+        [].forEach.call(audios, function (i) {
+          i.addEventListener("play", pauseAll.bind(i));
+        });
+
+        // 判断按钮是哪个地址
+        if (this.$refs.tu[index].src === this.img[1].pic) {
+          // 换成暂停按钮
+          this.$refs.tu[index].src = this.img[0].pic;
+          // 将所有音频暂停
+          for (let i = 0; i < audios.length; i++) {
+            audios[i].pause();
+          }
+        } else {
+          for (let i = 0; i < audios.length; i++) {
+            // 将所有的按钮变成暂停
+            this.$refs.tu[i].src = this.img[0].pic;
+          }
+          // 将当前按钮变成播放
+          this.$refs.tu[index].src = this.img[1].pic;
+          // 播放当前音频
+          audios[index].play();
+        }
+      }, 50);
+    },
+  },
+  computed: {
+    // 根据传来的音乐id 返回一个播放链接
+    playmusic() {
+      return `https://music.163.com/song/media/outer/url?id=${this.playId}`;
     },
   },
   mounted() {
+    // 在全局事件总线上绑定方法 Search处调用此方法则会把数据传回来
     this.$bus.$on("ItemData", this.ItemData);
+    this.$bus.$on("UpdatedData", this.UpdatedData);
   },
 };
 </script>
 
 /* 配置组件样式 */
 <style scoped>
-.album {
-  min-height: 50rem; /* Can be removed; just added for demo purposes */
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  background-color: #f7f7f7;
-}
-
 .card {
-  float: left;
-  width: 33.333%;
-  padding: 0.75rem;
-  margin-bottom: 2rem;
-  border: 1px solid #efefef;
-  text-align: center;
+  height: 7rem;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-.card > img {
-  margin-bottom: 0.75rem;
-  border-radius: 100px;
+.card > .pic {
+  height: 5rem;
+  margin: 1rem 0;
 }
-
-.card-text {
-  font-size: 85%;
+.card-name {
+  width: 23rem;
+  display: inline-block;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  vertical-align: top;
 }
-.jz {
-  text-align: center;
+.card-name p:first-child {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  /*强制文字在一行文本框内*/
+  white-space: nowrap;
+  /*溢出部分文字隐藏*/
+  overflow: hidden;
+  /*溢出部分省略号处理*/
+  text-overflow: ellipsis;
+}
+.card-name p:last-child {
+  font-size: 1.6rem;
+  /*强制文字在一行文本框内*/
+  white-space: nowrap;
+  /*溢出部分文字隐藏*/
+  overflow: hidden;
+  /*溢出部分省略号处理*/
+  text-overflow: ellipsis;
+}
+.card > .isplay {
+  width: 3.5rem;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 1.75rem;
+  right: 3rem;
+}
+.mask {
+  background-color: rgb(0, 0, 0);
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.mask > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 20%;
 }
 </style>

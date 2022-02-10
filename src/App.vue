@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container body-bg">
     <Search />
     <Item />
   </div>
@@ -17,4 +17,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.body-bg {
+  height: 100%;
+  background: url("../src/assets/bg.jpg") no-repeat 100% 100%/100% 100%;
+  background-attachment: fixed;
+}
+</style>
 
