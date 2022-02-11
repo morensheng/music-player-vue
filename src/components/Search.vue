@@ -26,10 +26,10 @@ export default {
     };
   },
   methods: {
-    async Search() {
+    Search() {
       // 请求之前通知Item组件更新他的data
       this.$bus.$emit("UpdatedData", { isFirst: false, isLoading: true });
-      await this.$axios
+      this.$axios
         .get(
           /* 
             必选参数 : keywords : 关键词
