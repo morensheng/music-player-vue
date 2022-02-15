@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "MusicPlay",
-=======
   "name": "MusicPlayer",
->>>>>>> c10fa8494688890655b11b9b0bf09c4b7025c06f
   "version": "0.1.0",
   "private": true,
   "scripts": {
