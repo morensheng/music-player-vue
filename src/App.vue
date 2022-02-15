@@ -30,5 +30,12 @@ export default {
 .body-bg {
   background-color: #5ebee4;
 }
+/* 解决页面左右溢出 */
+html,
+body {
+  max-width: 100%;
+
+  overflow-x: hidden;
+}
 </style>
 

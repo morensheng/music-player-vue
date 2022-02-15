@@ -154,7 +154,6 @@ export default {
 }
 .card {
   height: 4rem;
-  width: 100vw;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
