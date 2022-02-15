@@ -20,9 +20,7 @@ export default {
 
 <style scoped>
 .body-bg {
-  height: 100%;
-  background: url("../src/assets/bg.jpg") no-repeat 100% 100%/100% 100%;
-  background-attachment: fixed;
+  background-color: skyblue;
 }
 </style>
 

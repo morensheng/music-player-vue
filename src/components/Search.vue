@@ -74,7 +74,7 @@ export default {
 }
 .p1 {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 .sdiv {
@@ -95,6 +95,6 @@ input {
   width: 1.5rem;
   position: absolute;
   top: 0.25rem;
-  right: 3rem;
+  right: 2.8rem;
 }
 </style>

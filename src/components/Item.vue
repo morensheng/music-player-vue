@@ -160,7 +160,7 @@ export default {
   width: 10rem;
   display: inline-block;
   margin-top: .3rem;
-  margin-left: 1rem;
+  margin-left: .8rem;
   vertical-align: top;
 }
 .card-name p:first-child {
@@ -184,7 +184,7 @@ export default {
   text-overflow: ellipsis;
 }
 .card > .isplay {
-  width: 2rem;
+  width: 1.8rem;
   font-size: 1.6rem;
   position: absolute;
   top: 1rem;
