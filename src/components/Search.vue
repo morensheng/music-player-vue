@@ -26,10 +26,10 @@ export default {
     };
   },
   methods: {
-    async Search() {
+    Search() {
       // 请求之前通知Item组件更新他的data
       this.$bus.$emit("UpdatedData", { isFirst: false, isLoading: true });
-      await this.$axios
+      this.$axios
         .get(
           /* 
             必选参数 : keywords : 关键词
@@ -48,7 +48,6 @@ export default {
             this.keyWord = "";
           },
           (error) => {
-            // console.log("失败了", error.message);
             this.$bus.$emit("UpdatedData", {
               isLoading: false,
               errMsg: error.message,
@@ -64,7 +63,7 @@ export default {
 
 /* 配置组件样式 */
 <style scoped>
-.search{
+.search {
   margin: 2rem 0;
   overflow: hidden;
 }

@@ -9,8 +9,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 
 // step3：使每次请求都会带一个 /api 前缀 
-axios.defaults.baseURL = '/api';
-// axios.defaults.baseURL = 'https://musicapi-five.vercel.app/';
+// axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = 'https://musicapi-five.vercel.app/';
 
 new Vue({
   beforeCreate() {
