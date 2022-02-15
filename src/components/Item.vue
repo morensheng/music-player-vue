@@ -160,13 +160,19 @@ export default {
   width: 10rem;
   display: inline-block;
   margin-top: .3rem;
-  margin-left: .8rem;
+  margin-left: .5rem;
   vertical-align: top;
+  /*强制文字在一行文本框内*/
+  white-space: nowrap;
+  /*溢出部分文字隐藏*/
+  overflow: hidden;
+  /*溢出部分省略号处理*/
+  text-overflow: ellipsis;
 }
 .card-name p:first-child {
   font-size: .8rem;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/

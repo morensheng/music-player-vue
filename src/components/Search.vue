@@ -1,7 +1,7 @@
 /* 配置组件的结构 */
 <template>
   <section class="text-center search">
-    <div class="p1">永远相信美好的事情即将发生</div>
+    <div class="music">MUSIC</div>
     <div class="sdiv">
       <input
         type="text"
@@ -14,7 +14,6 @@
         src="https://s3.bmp.ovh/imgs/2022/02/3d705ac721cb611c.png"
         @click="Search"
         class="sbtn"
-        alt=""
       />
     </div>
   </section>
@@ -72,10 +71,11 @@ export default {
   margin: 2rem 0;
   overflow: hidden;
 }
-.p1 {
+.music {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 .sdiv {
   width: 100%;
