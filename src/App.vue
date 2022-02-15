@@ -1,5 +1,5 @@
 <template>
-  <div class="container body-bg">
+  <div class="containerr body-bg">
     <Search />
     <Item />
   </div>
@@ -19,8 +19,16 @@ export default {
 </script>
 
 <style scoped>
+.containerr {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  min-width: 400px;
+}
 .body-bg {
-  background-color: skyblue;
+  background-color: #5ebee4;
 }
 </style>
 

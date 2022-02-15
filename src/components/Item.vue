@@ -13,7 +13,8 @@
       @click="ListenMusic(listInfo[index].id, index)"
     >
       <audio :src="playmusic" hidden loop autoplay controls></audio>
-      <img class="pic" :src="s.picUrl" />
+      <img class="pic" v-lazy="s.picUrl" />
+      <!-- <img class="pic" :src="s.picUrl" /> -->
       <div class="card-name">
         <p>{{ listInfo[index].name }}</p>
         <p>{{ arInfo[index].name }}—{{ s.name }}</p>
@@ -144,23 +145,28 @@ export default {
 
 /* 配置组件样式 */
 <style scoped>
-.row .welcome,.row .err{
-  font-size: 2rem;
+.row {
+  background-color: #87ceeb;
+}
+.row .welcome,
+.row .err {
+  font-size: 1.5rem;
 }
 .card {
   height: 4rem;
+  width: 100vw;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .card > .pic {
   height: 2.8rem;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 .card-name {
-  width: 10rem;
+  width: 8.5rem;
   display: inline-block;
-  margin-top: .3rem;
-  margin-left: .5rem;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
   vertical-align: top;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
@@ -170,9 +176,9 @@ export default {
   text-overflow: ellipsis;
 }
 .card-name p:first-child {
-  font-size: .8rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/
@@ -181,7 +187,7 @@ export default {
   text-overflow: ellipsis;
 }
 .card-name p:last-child {
-  font-size: .8rem;
+  font-size: 0.8rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/
@@ -194,7 +200,7 @@ export default {
   font-size: 1.6rem;
   position: absolute;
   top: 1rem;
-  right: 1.6rem;
+  right: 1.2rem;
 }
 .mask {
   background-color: rgb(0, 0, 0);
@@ -214,5 +220,12 @@ export default {
   right: 0;
   margin: auto;
   width: 20%;
+}
+/* 图片懒加载 */
+img[lazy="loading"] {
+  display: block;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 auto;
 }
 </style>

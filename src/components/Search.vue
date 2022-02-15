@@ -73,12 +73,12 @@ export default {
 }
 .music {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
 .sdiv {
-  width: 100%;
+  width: 100vw;
   position: relative;
   margin: 0 auto;
 }
@@ -95,6 +95,8 @@ input {
   width: 1.5rem;
   position: absolute;
   top: 0.25rem;
-  right: 2.8rem;
+  bottom: 0rem;
+  left: 12rem;
+  right: 0rem;
 }
 </style>
