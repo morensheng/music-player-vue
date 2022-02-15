@@ -164,7 +164,7 @@ export default {
   vertical-align: top;
 }
 .card-name p:first-child {
-  font-size: 1.2rem;
+  font-size: .8rem;
   font-weight: bold;
   margin-bottom: 0.3rem;
   /*强制文字在一行文本框内*/
@@ -175,7 +175,7 @@ export default {
   text-overflow: ellipsis;
 }
 .card-name p:last-child {
-  font-size: 1rem;
+  font-size: .8rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/

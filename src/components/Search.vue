@@ -73,13 +73,12 @@ export default {
   overflow: hidden;
 }
 .p1 {
-  font-family: STXingkai; /* 这是字体英文名称 */
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 .sdiv {
-  width: 100vw;
+  width: 100%;
   position: relative;
   margin: 0 auto;
 }
@@ -96,6 +95,6 @@ input {
   width: 1.5rem;
   position: absolute;
   top: 0.25rem;
-  right: 5rem;
+  right: 3rem;
 }
 </style>
