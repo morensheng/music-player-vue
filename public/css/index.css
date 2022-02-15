@@ -42,3 +42,6 @@ a {
 .clearfloat {
   zoom: 1;
 }
+html{
+  min-width: 300px;
+}

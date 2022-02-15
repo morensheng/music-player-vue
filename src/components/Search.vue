@@ -1,16 +1,21 @@
 /* 配置组件的结构 */
 <template>
   <section class="text-center search">
-    <h3 class="p1">永远相信美好的事情即将发生</h3>
-    <div>
+    <div class="p1">永远相信美好的事情即将发生</div>
+    <div class="sdiv">
       <input
         type="text"
         class="form-control"
         v-model="keyWord"
         @keyup.enter="Search"
-        placeholder="输入你需要查找的歌曲或歌手"
       />&nbsp;
-      <button @click="Search" class="btn btn-info">搜索</button>
+      <!-- <button @click="Search" class="btn btn-info">搜索</button> -->
+      <img
+        src="https://s3.bmp.ovh/imgs/2022/02/3d705ac721cb611c.png"
+        @click="Search"
+        class="sbtn"
+        alt=""
+      />
     </div>
   </section>
 </template>
@@ -70,9 +75,27 @@ export default {
 .p1 {
   font-family: STXingkai; /* 这是字体英文名称 */
   text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.sdiv {
+  width: 100vw;
+  position: relative;
+  margin: 0 auto;
 }
 .form-control {
-  width: 220px !important;
+  width: 10rem !important;
   display: inline-block;
+}
+input {
+  height: 2rem;
+  font-size: 1rem;
+  padding-right: 2.2rem;
+}
+.sbtn {
+  width: 1.5rem;
+  position: absolute;
+  top: 0.25rem;
+  right: 5rem;
 }
 </style>

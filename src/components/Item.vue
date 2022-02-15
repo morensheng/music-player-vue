@@ -1,10 +1,10 @@
 /* 配置组件的结构 */
 <template>
   <div class="row">
-    <h1 class="text-center welcome" v-show="showModal.isFirst">欢迎使用</h1>
-    <h2 class="text-center" v-show="showModal.errMsg">
+    <div class="text-center welcome" v-show="showModal.isFirst">欢迎使用</div>
+    <div class="text-center err" v-show="showModal.errMsg">
       {{ showModal.errMsg }}
-    </h2>
+    </div>
 
     <div
       class="card container"
@@ -144,26 +144,29 @@ export default {
 
 /* 配置组件样式 */
 <style scoped>
+.row .welcome,.row .err{
+  font-size: 2rem;
+}
 .card {
-  height: 7rem;
+  height: 4rem;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .card > .pic {
-  height: 5rem;
-  margin: 1rem 0;
+  height: 2.8rem;
+  margin: .5rem 0;
 }
 .card-name {
-  width: 23rem;
+  width: 10rem;
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: .3rem;
   margin-left: 1rem;
   vertical-align: top;
 }
 .card-name p:first-child {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/
@@ -172,7 +175,7 @@ export default {
   text-overflow: ellipsis;
 }
 .card-name p:last-child {
-  font-size: 1.6rem;
+  font-size: 1rem;
   /*强制文字在一行文本框内*/
   white-space: nowrap;
   /*溢出部分文字隐藏*/
@@ -181,11 +184,11 @@ export default {
   text-overflow: ellipsis;
 }
 .card > .isplay {
-  width: 3.5rem;
+  width: 2rem;
   font-size: 1.6rem;
   position: absolute;
-  top: 1.75rem;
-  right: 3rem;
+  top: 1rem;
+  right: 1.6rem;
 }
 .mask {
   background-color: rgb(0, 0, 0);
